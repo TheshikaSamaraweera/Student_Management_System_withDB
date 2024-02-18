@@ -1,0 +1,10 @@
+!!!!!!!!!!!!!!!READ ME FIRST !!!!!!!!!!!!!!!!!!
+
+ADMIN User Name=admin
+ADMIN User password=admin
+
+****************************************************
+
+First check database file path and image sources file paths.
+
+************************************************

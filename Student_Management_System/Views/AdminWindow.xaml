@@ -1,0 +1,90 @@
+﻿<Window x:Class="Student_Management_System.Views.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Student_Management_System.ViewModels"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="500" Width="850" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:AdminWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Theshika Navod\Desktop\New folder (5)\Student_Management_System-master\Student_Management_System\Views\sdf.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="225"/>
+            <RowDefinition Height="180"/>
+        </Grid.RowDefinitions>
+
+        <ListView ItemsSource="{Binding Listofuser}" Margin="427,132,10,103" Grid.RowSpan="2" Background="#C9DFEC">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}"  HeaderContainerStyle="{StaticResource DataGridHeaderStyle}" Width="auto"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"  HeaderContainerStyle="{StaticResource DataGridHeaderStyle}" Width="80"/>
+                        <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}"  HeaderContainerStyle="{StaticResource DataGridHeaderStyle}" Width="80"/>
+                        <GridViewColumn Header="Action"  HeaderContainerStyle="{StaticResource DataGridHeaderStyle}" Width="auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="4">
+                                        <Button Name="BtnUpdate" Content="Update" Width="60" Height="25" Margin="10,0,0,0" Command="{Binding DataContext.UpdateCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                CommandParameter="{Binding}" Style="{StaticResource ActionButtonStyle}"/>
+                                        <Button Name="BtnDelete" Content="Delete" Width="60" Height="25" Margin="10,0,0,0" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                CommandParameter="{Binding}" Style="{StaticResource ActionButtonStyle}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Border Grid.Column="0" BorderBrush="#ffff" CornerRadius="10" Background="#ffff" Opacity="0.8" BorderThickness="1" Margin="10,10,440,45" Width="350">
+            <StackPanel Margin="5,5,5,5">
+                <Label Content="Add new User" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="UserName"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserName}"  Style="{StaticResource adminRoundedTextBoxStyle}" Margin="0 0 0 10" Height="30"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password}" Style="{StaticResource adminRoundedTextBoxStyle}" Height="30"/>
+                    <Button Grid.Row="2" Style="{StaticResource AdminButtonStyle}" Grid.ColumnSpan="2" Content="Add" Margin="0 20 0 0" HorizontalAlignment="Right" Width="100"
+                            Command="{Binding AddUserCommand}" Foreground="Black"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="#ffff" CornerRadius="10" Background="#ffff" Opacity="0.8" BorderThickness="1" Margin="10,10,440,0" Grid.Row="1" Width="350">
+            <StackPanel Margin="5">
+                <Label Content="Update User"  FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="UserName"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedUser.Name}" Style="{StaticResource adminRoundedTextBoxStyle}" Margin="0 0 0 10" Height="30" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SelectedUser.Password}" Style="{StaticResource adminRoundedTextBoxStyle}"  Height="30"/>
+                    <Button Grid.Row="2" Style="{StaticResource AdminButtonStyle}" Grid.ColumnSpan="2" Content="Update" Margin="0 20 0 0" HorizontalAlignment="Right" Width="100"
+                            Command="{Binding UpdateUserCommand}" Foreground="Black"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
